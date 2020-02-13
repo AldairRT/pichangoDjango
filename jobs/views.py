@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from .models import Juego, Cancha, Jugador
 from django.contrib.auth.forms import UserCreationForm
 from .forms import CreateUserForm
+from datetime import date, datetime, timedelta
 
 from django.contrib import messages
 
@@ -55,8 +56,9 @@ def logoutUser(request):
 
 
 def home(request):
-    juegos = Juego.objects.all()[:2]
-
+    startdate = datetime.today()
+    enddate = startdate + timedelta(days=1)
+    juegos = Juego.objects.filter(fecha__range=[startdate, enddate])
     context = {'data':juegos}
     return render(request, 'home.html', context)
 
