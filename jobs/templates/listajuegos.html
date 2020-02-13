@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PichanGO</title>
+    <link rel="shortcut icon" href="{% static "./Images/ball.icon.ico" %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static "./reset.css" %}" >
+    <link rel="stylesheet" href="{% static "./styles.css" %}" >
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <div class="wrapper">
+    <div class="w3_baner">  
+        <!--header-->
+        <header class ="header">
+            <figure>
+                <img src="{% static "./Images/logosmall.png" %}" alt="logo">
+            </figure>
+            <nav class="nav-main">
+                <ul>
+                    <li><a href="./">JUEGOS</a></li>
+                    <li><a href="./">CANCHAS</a></li>
+                    <li><a class="active" href="login.html">LOGIN</a></li>
+                </ul>
+            </nav>
+        </header>
+        <!--main-->
+        <main class= "main">  
+            
+            
+              
+
+                    <div class="search">
+                        <input type="text" class="searchTerm" placeholder="Distrito o nombre de cancha">
+                        <input type="submit" name="submit" class="submit" value="Buscar"></input>
+                        <table class="table table-sm table-dark">
+                            <thead>
+                            <tr>
+                                <th scope="col">Cancha</th>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Hora</th>
+                                <th scope="col">Plazas disponibles</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in data.all %}
+                                <tr>
+                                    <th scope="row"><a href="{% url 'detail' item.id %}">{{ item.cancha }}</a></th>
+                                    <td><a href="{% url 'detail' item.id %}">{{ item.fecha }}</a></td>
+                                    <td><a href="{% url 'detail' item.id %}">{{ item.hora }}</a></td>
+                                    <td>Aún hay vacantes</td>
+                                </tr>
+                                {%  endfor   %}
+                            </tbody>
+                        </table>
+                            
+                    </div>
+                
+        
+        </main>
+  
+        <!--footer-->
+        <footer class="footer">
+
+            <p>Copyrtight &copy; 2020, pichanGO  </p>
+        </footer>
+
+    </div>
+    </div>
+
+</body>
+</html>

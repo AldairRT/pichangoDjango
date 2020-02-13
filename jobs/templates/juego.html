@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PichanGO</title>
+    <link rel="shortcut icon" href="{% static "./Images/ball.icon.ico" %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static "./reset.css" %}" >
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static "./styles.css" %}" >
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <div class="wrapper">
+    <div class="w3_baner">  
+        <!--header-->
+        <header class ="header">
+            <figure>
+               <a href="/"><img src="{% static "./Images/logosmall.png" %}" alt="logo"></a>
+            </figure>
+            <nav class="nav-main">
+                <ul>
+                    <li><a href="./">JUEGOS</a></li>
+                    <li><a href="./">CANCHAS</a></li>
+                    <li><a class="active" href="login.html">LOGIN</a></li>
+                </ul>
+            </nav>
+        </header>
+        <!--main-->
+        <main class= "main">  
+            
+                    <div class="jumbotron">
+                        <h3 class="display-4">{{ data.cancha}} | {{ data.fecha}} | {{data.hora}}</h3>
+                        <p class="lead">{{ data.descripcion}}</p>
+                        <a class="btn btn-primary btn-lg" href="{% url 'register' %}" role="button">Inscribirse</a>
+                        <hr class="my-4">
+                        <p></p>
+                        
+                    </div>
+        </main>
+  
+        <!--footer-->
+        <footer class="footer">
+
+            <p>Copyrtight &copy; 2020, pichanGO  </p>
+        </footer>
+
+    </div>
+    </div>
+
+</body>
+</html>

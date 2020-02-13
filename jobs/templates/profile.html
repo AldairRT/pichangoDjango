@@ -1,0 +1,16 @@
+
+
+<style>
+    .hello-msg {
+
+        font-size: 20px;
+        color: #000;
+        margin-right: 20px;
+    }
+
+</style>
+
+<h3>UserProfile</h3>
+
+<span class="hello-msg">Hello,  {{request.user}} </span>
+<span class="hello-msg"><a href="{% url 'logout' %}">Logout</a></span>
