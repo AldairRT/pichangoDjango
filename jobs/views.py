@@ -4,6 +4,7 @@ from .models import Juego, Cancha, Jugador
 from django.contrib.auth.forms import UserCreationForm
 from .forms import CreateUserForm
 from datetime import date, datetime, timedelta
+from django.db.models import Q
 
 from django.contrib import messages
 
@@ -54,6 +55,13 @@ def logoutUser(request):
     logout(request)
     return redirect('home')
 
+
+def buscajuegos(request):
+   q = request.GET.get('q', '')
+   querys = (Q(cancha__nombre__icontains=q) | Q(cancha__distrito__icontains=q))
+   buscajuegos = Juego.objects.filter(querys)
+   context = {'data':buscajuegos}
+   return render(request, 'buscajuegos.html', context)
 
 def home(request):
     startdate = datetime.today()

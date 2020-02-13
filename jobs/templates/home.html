@@ -61,8 +61,10 @@
                             {%  endfor   %}
                         </tbody>
                       </table>
-                            <input type="text" class="searchTerm" placeholder="Distrito o nombre de cancha">
+                        <form action="/buscajuegos/" method="GET">
+                            <input type="text" name='q' class="searchTerm" placeholder="Distrito o nombre de cancha">
                             <input  type="submit" name="submit" class="submit" onClick="window.location='listajuegos'; "value="Buscar"></input>
+                        </form>
                     </div>
 
                     <P>en cualquier momento, en cualquier lugar </P>
