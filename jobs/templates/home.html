@@ -41,26 +41,33 @@
 
                     <div class="search">
 
-                      <table class="table table-sm table-dark">
-                        <thead>
-                          <tr>
-                            <th scope="col">Cancha</th>
-                            <th scope="col">Fecha</th>
-                            <th scope="col">Hora</th>
-                            <th scope="col">Plazas disponibles</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                            {% for item in data.all %}
+                        <table class="table table-sm table-dark">
+                            <thead>
                             <tr>
-                                <th scope="row"><a href="{% url 'detail' item.id %}">{{ item.cancha }}</a></th>
-                                <td><a href="{% url 'detail' item.id %}">{{ item.fecha }}</a></td>
-                                <td><a href="{% url 'detail' item.id %}">{{ item.hora }}</a></td>
-                                <td>Aún hay vacantes</td>
+                                <th scope="col">Cancha</th>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Hora</th>
+                                <th scope="col">Distrito</th>
+                                <th scope="col">Costo/Hora</th>
+                                <th scope="col">Inscrit@s</th>
                             </tr>
-                            {%  endfor   %}
-                        </tbody>
-                      </table>
+                            </thead>
+                            <tbody>
+                                {% for item in data.all %}
+                                <tr>
+                                    <th scope="row"><a href="{% url 'detail' item.id %}">{{ item.cancha.nombre }}</a></th>
+                                    <td><a href="{% url 'detail' item.id %}">{{ item.fecha }}</a></td>
+                                    <td><a href="{% url 'detail' item.id %}">{{ item.hora }}</a></td>
+                                    <td><a href="{% url 'detail' item.id %}">{{ item.cancha.distrito }}</a></td>
+                                    <td>S/{{ item.cancha.costo_por_hora }}</td>
+                                    <td>
+                                        {{ item.jugador.all | length }}
+                                          
+                                    </td>
+                                </tr>
+                                {%  endfor   %}
+                            </tbody>
+                        </table>
                         <form action="/buscajuegos/" method="GET">
                             <input type="text" name='q' class="searchTerm" placeholder="Distrito o nombre de cancha">
                             <input  type="submit" name="submit" class="submit" onClick="window.location='listajuegos'; "value="Buscar"></input>
