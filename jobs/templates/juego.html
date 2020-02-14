@@ -33,11 +33,36 @@
         <main class= "main">  
             
                     <div class="jumbotron">
-                        <h3 class="display-4">{{ data.cancha}} | {{ data.fecha}} | {{data.hora}}</h3>
+                        <h3 class="display-4">{{ data.fecha}} | {{data.hora}}</h3>
+                        <p class="lead">Lugar: {{ data.cancha}} - {{ data.cancha.direccion}}</p>
                         <p class="lead">{{ data.descripcion}}</p>
                         <a class="btn btn-primary btn-lg" href="{% url 'register' %}" role="button">Inscribirse</a>
                         <hr class="my-4">
-                        <p></p>
+                        <p>Pichanguer@s inscritos:</p>
+                        <table class="table table-sm table-dark">
+                            
+                            
+                            <thead>
+                            <tr>
+                                <th scope="col">Pichanguer@</th>
+                                <th scope="col">Distrito</th>
+                                <th scope="col">Posición</th>
+                                <th scope="col">Descripción</th>
+                                
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in data.jugador.all %}
+                                <tr>
+                                    <th scope="row">{{ item.nombre }} {{ item.apellido }}</th>
+                                    <td>{{ item.distrito }}</td>
+                                    <td>{{ item.posicion }}</td>
+                                    <td>{{ item.descripcion }}</td>
+                                    
+                                </tr>
+                                {%  endfor   %}
+                            </tbody>
+                        </table>
                         
                     </div>
         </main>
