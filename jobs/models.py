@@ -1,4 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 # Create your models here.
 
@@ -15,18 +18,23 @@ class Jugador(models.Model):
     ('Ataque','Ataque'),
     ('Mixto','Mixto'),
     )
-    nombre=models.CharField(max_length=50)
-    apellido=models.CharField(max_length=50)
-    nick=models.CharField(max_length=50)
-    email=models.EmailField()
+    usuario=models.OneToOneField(User, on_delete=models.CASCADE)
     telefono=models.CharField(max_length=20)
     distrito=models.CharField(max_length=100,choices= DISTRIT) 
     posicion=models.CharField(max_length=20,choices= POSITION)
     descripcion=models.TextField()
-    password=models.CharField(max_length=156)
 
     def  __str__(self):
-        return self.nick
+        return self.usuario.username
+
+@receiver(post_save, sender=User)
+def crear_usuario_perfil(sender, instance, created, **kwargs):
+    if created:
+        Jugador.objects.create(usuario=instance)
+
+@receiver(post_save, sender=User)
+def guardar_usuario_perfil(sender, instance, **kwargs):
+    instance.jugador.save()
 
 class Cancha(models.Model):
     DISTRIT = (

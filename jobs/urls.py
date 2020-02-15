@@ -1,10 +1,16 @@
 from django.urls import path
 from . import views
+from jobs.views import *
 
 urlpatterns = [
     path('register/', views.registerPage, name ="register"),
     path('login/', views.loginPage, name ="login"),
     path('logout/', views.logoutUser, name ="logout"),
+
+    path('registrate/', SignUpView.as_view(), name='sign_up'),
+    path('inicia-sesion/', SignInView.as_view(), name='sign_in'),
+    path('cerrar-sesion/', SignOutView.as_view(), name='sign_out'),
+
 
     path('', views.home, name ="home"),
     path('listajuegos/', views.listajuegos, name ="listajuegos"),

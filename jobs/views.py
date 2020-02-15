@@ -2,17 +2,14 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import *
 from django.contrib.auth.forms import UserCreationForm
-from .forms import CreateUserForm
+from .forms import CreateUserForm, SignUpForm
 from datetime import date, datetime, timedelta
 from django.db.models import Q
-
 from django.contrib import messages
-
-
 from django.contrib.auth import authenticate, login, logout 
-
 from django.contrib.auth.decorators import login_required
-
+from django.views.generic import CreateView, TemplateView
+from django.contrib.auth.views import LoginView, LogoutView 
 # Create your views here.
 
 def registerPage(request):
@@ -55,6 +52,28 @@ def logoutUser(request):
     logout(request)
     return redirect('home')
 
+#Vistas creadas por Gustavo
+
+class SignUpView(CreateView):
+    model = Jugador
+    form_class = SignUpForm
+
+    def form_valid(self, form):
+        '''
+        En este parte, si el formulario es valido guardamos lo que se obtiene de él y usamos authenticate para que el usuario incie sesión luego de haberse registrado y lo redirigimos al index
+        '''
+        form.save()
+        usuario = form.cleaned_data.get('username')
+        password = form.cleaned_data.get('password1')
+        usuario = authenticate(username=usuario, password=password)
+        login(self.request, usuario)
+        return redirect('/listajuegos/')
+
+class SignInView(LoginView):
+    template_name = 'jobs/iniciar_sesion.html'
+
+class SignOutView(LogoutView):
+    pass
 
 def buscajuegos(request):
    q = request.GET.get('q', '')
