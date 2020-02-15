@@ -8,8 +8,8 @@
     <title>PichanGO</title>
     <link rel="shortcut icon" href="{% static "./images/ball.icon.ico" %}" type="image/x-icon">
     <link rel="stylesheet" href="{% static "./css/reset.css" %}" >
-    <link rel="stylesheet" href="{% static "./css/styles.css" %}" >
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static "./css/styles.css" %}" >
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 </head>
@@ -19,7 +19,7 @@
         <!--header-->
         <header class ="header">
             <figure>
-                <img src="{% static "./Images/logosmall.png" %}" alt="logo">
+               <a href="/"><img src="{% static "./Images/logosmall.png" %}" alt="logo"></a>
             </figure>
             <nav class="nav-main">
                 <ul>
@@ -32,47 +32,44 @@
         <!--main-->
         <main class= "main">  
             
-            
-              
-                    
-                    <div class="search">
-                        <p>Busca partidos creados en pichanGO</p>
-                        <form action="/buscajuegos/" method="GET">
-                            <input type="text" name='q' class="searchTerm" placeholder="Distrito o nombre de cancha">
-                            <input  type="submit" name="submit" class="submit" onClick="window.location='listajuegos'; "value="Buscar"></input>
-                        </form>
-                        <p>Estos son todos los partidos creados</p>
+                    <div class="jumbotron">
+                        <h3 class="display-4">{{ data.nombre }}</h3>
+                        <p class="lead">{{ data.direccion}} - {{ data.distrito}}</p>
+                        <p>Teléfono: {{ data.teléfono}}</p>
+                        <p>Costo por hora: S/{{ data.costo_por_hora}}</p>
+                        <p>Jugadores por equipo: {{ data.jugadores_por_equipo}}</p>                        
+                        <hr class="my-4">
+                        <p>Juegos programados en {{ data.nombre }}:</p>
                         <table class="table table-sm table-dark">
                             <thead>
                             <tr>
-                                <th scope="col">Cancha</th>
+                                
                                 <th scope="col">Fecha</th>
                                 <th scope="col">Hora</th>
-                                <th scope="col">Distrito</th>
-                                <th scope="col">Costo/Hora</th>
+
+
                                 <th scope="col">Inscrit@s</th>
                             </tr>
                             </thead>
                             <tbody>
-                                {% for item in data.all %}
+                                
+                                {% for juego in juegos.all %}
                                 <tr>
-                                    <th scope="row"><a href="{% url 'detail' item.id %}">{{ item.cancha.nombre }}</a></th>
-                                    <td><a href="{% url 'detail' item.id %}">{{ item.fecha }}</a></td>
-                                    <td><a href="{% url 'detail' item.id %}">{{ item.hora }}</a></td>
-                                    <td><a href="{% url 'detail' item.id %}">{{ item.cancha.distrito }}</a></td>
-                                    <td>S/{{ item.cancha.costo_por_hora }}</td>
+                                    
+                                    <td><a href="">{{ juego.fecha }}</a></td>
+                                    <td><a href="">{{ juego.hora }}</a></td>
+                                    
                                     <td>
-                                        {{ item.jugador.all | length }}
-                                          
+                                        
+                                        {{ juego.jugador.all | length }}
                                     </td>
                                 </tr>
                                 {%  endfor   %}
                             </tbody>
                         </table>
-                            
+                        
+                        
                     </div>
-                
-        
         </main>
   
         <!--footer-->

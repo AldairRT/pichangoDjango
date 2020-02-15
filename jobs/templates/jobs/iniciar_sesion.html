@@ -33,36 +33,14 @@
         <main class= "main">  
             
                     <div class="jumbotron">
-                        <h3 class="display-4">{{ data.fecha}} | {{data.hora}}</h3>
-                        <p class="lead">Lugar: {{ data.cancha}} - {{ data.cancha.direccion}} {{ data.cancha.distrito }} </p>
-                        <p class="lead">{{ data.descripcion}}</p>
-                        <a class="btn btn-primary btn-lg" href="{% url 'register' %}" role="button">Inscribirse</a>
+                        <h3 class="display-4">Login</h3>
                         <hr class="my-4">
-                        <p>Pichanguer@s inscritos:</p>
-                        <table class="table table-sm table-dark">
-                            
-                            
-                            <thead>
-                            <tr>
-                                <th scope="col">Pichanguer@</th>
-                                <th scope="col">Distrito</th>
-                                <th scope="col">Posición</th>
-                                <th scope="col">Descripción</th>
-                                
-                            </tr>
-                            </thead>
-                            <tbody>
-                                {% for item in data.jugador.all %}
-                                <tr>
-                                    <th scope="row">{{ item.usuario.first_name }} {{ item.usuario.last_name }}</th>
-                                    <td>{{ item.distrito }}</td>
-                                    <td>{{ item.posicion }}</td>
-                                    <td>{{ item.descripcion }}</td>
-                                    
-                                </tr>
-                                {%  endfor   %}
-                            </tbody>
-                        </table>
+                        <form method="POST">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <input type="submit" name="submit">
+                        </form>
+                        
                         
                     </div>
         </main>
