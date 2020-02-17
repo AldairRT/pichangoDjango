@@ -46,15 +46,15 @@ layout
 */
 
 .wrapper {
-    width: 500px;
-    margin: 0 auto;
-    background: url('/static/images/Ballkick\ Official.jpg');
+    background: url('/static/images/Ballkick\ Official.jpg' )
+    no-repeat center center;
     min-height:  60rem;
     overflow: hidden;
+    position: absolute;
 }
 
 .w3_baner {
-    background: url('/static/images/dott.png');
+    background: url('/static/images/dott.png')repeat 0px 0px;
     background-size: 2px;
     -webkit-background-size: 2px;
     -moz-background-size: 2px;
@@ -62,16 +62,17 @@ layout
     -ms-background-size: 2px;
 }
 
+
+
 /*
 .header
 */
 
 .header {
-    margin-top:30px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    padding: 20px;
     height: 80px;
     font-family: Helvetica;
 }   
@@ -97,8 +98,9 @@ header h1 {
 }
 
 .header img {
-    margin-top: 4rem;
-    margin-left: 2rem;
+    display:block;
+    margin-right:auto;
+    margin-left:auto;
 }
 
 .nav-main {
@@ -147,8 +149,7 @@ main
 */
 
 main {
-    margin-top: 40px;
-    padding: 20px;
+    margin-top: 7rem;
 }
 
     
@@ -179,10 +180,6 @@ main {
     font-style: bold;
     padding: 10px;
 }
-
-.main .jumbotron p {
-    color: black;
-}
  
 .btn-1 {
     background-color: orangered;
@@ -194,18 +191,58 @@ main {
 
 /*search*/
 
+.main .menu {
+    display: flex;
+    justify-content: space-between;
+    background-color: lightgray;
+    padding: 7px;
+    font-weight:550;
+}
+
+.main .tabla, .resultado {
+    width: 60%;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.menu li {
+    font-family: helvetica;
+    font-size: 14px;
+    font-weight: bold;    
+}
+
+.main .ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    
+}
+
+.lista-resultado {
+    justify-content: space-between;
+    padding: 7px;
+    align-items: center;
+    background-color: whitesmoke;
+}
+
+.lista-resultado a {
+    color: grey;
+    font-family: helvetica;
+    font-size: 14px;
+}
+
+
 .search {
     width: 100%;
     text-align: center;
     margin-top: 10px;
 }
 
-    input{
+input{
     padding:4px 10px;
     border:0;
     font-size:16px;
-    width: 350px;
-    height: 35px;
+    height: 35px;   
 }
     .submit{
     width: 100px;
@@ -253,7 +290,7 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 30px;
+    padding: 60px;
     font-size: 2.5rem;
     font-style: bold;
     color: whitesmoke;
@@ -264,12 +301,7 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0px;
-}
-
-.video {
-    display: flex;
-    justify-content: center;
+    padding: 40px;
 }
 
 /* footer */
@@ -285,8 +317,4 @@ main {
     font-size: 1.1rem;
     margin: 0;
     color: limegreen;
-}
-
-.lead p {
-    color:black;
 }

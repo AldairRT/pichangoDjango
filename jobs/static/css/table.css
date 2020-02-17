@@ -1,0 +1,90 @@
+.table-dark {
+    font-family: "Helvetica";
+    border-collapse: collapse;
+    height: 100%;
+    width: 80rem;
+    justify-content: center;
+    align-items: center;
+    margin-left:auto; 
+    margin-right:auto;
+}
+.table-dark td, .table-dark th {
+  padding: 8px;
+}
+
+.table-dark a {
+  color: blue;
+  font-weight: bold;
+}
+
+.table-dark td:hover {background-color:lightgrey}
+
+.table-dark td {background-color: white}
+
+.table-dark th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: rgba(2, 8, 15, 0.603);
+  color: white;
+}
+
+/*
+responsive
+*/
+@media only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+        /* Section three*/
+                table, thead, tbody, th, td, tr { 
+                        display: block; 
+                }
+                /* Section four*/
+                thead tr { 
+                        position: absolute;
+                        top: -9999px;
+                        left: -9999px;
+                }
+                
+                tr { border-bottom: 1px solid #ccc; }
+/* Section five*/
+                td { 
+                     border: none;
+                     border-bottom: 1px solid #eee; 
+                     position: relative;
+                     padding-left: 50%; 
+                }
+                td:before { 
+                        position: absolute;
+                        top: 3px;
+                        left: 6px;
+                        width: 45%; 
+                        padding-right: 10px; 
+                        white-space: nowrap;
+                        font-weight: bold;
+                }
+                /* Section six*/
+
+                td:nth-of-type(1):before { content: "Cancha"; }
+                td:nth-of-type(2):before { content: "Fecha"; }
+                td:nth-of-type(3):before { content: "Hora"; }
+                td:nth-of-type(4):before { content: "Distrito"; }
+                td:nth-of-type(5):before { content: "Costo/Hora"; }
+                td:nth-of-type(6):before { content: "Inscrit@s"; }
+
+}
+
+/* Section seven*/
+        @media only screen
+        and (min-device-width : 320px)
+        and (max-device-width : 480px) {
+                body { 
+                        padding: 0; 
+                        margin: 0; 
+                        width: 320px; }
+                }
+/* Section eight*/
+        @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+                body { 
+                        width: 495px; 
+                }
+        }

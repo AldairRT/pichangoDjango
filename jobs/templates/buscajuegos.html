@@ -6,11 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>PichanGO</title>
-    <link rel="shortcut icon" href="{% static "./images/ball.icon.ico" %}" type="image/x-icon">
-    <link rel="stylesheet" href="{% static "./css/reset.css" %}" >
-    <link rel="stylesheet" href="{% static "./css/styles.css" %}" >
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="Images/ball.icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="{% static './css/buscajuego.css' %}" >
+    <link rel="stylesheet" href="{% static './css/table.css' %}" >
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+    $( function() {
+      $( "#datepicker" ).datepicker();
+    } );
+    </script>
 
 </head>
 <body>
@@ -18,67 +25,53 @@
     <div class="w3_baner">  
         <!--header-->
         <header class ="header">
-            <figure>
-                <img src="{% static "./Images/logosmall.png" %}" alt="logo">
-            </figure>
+
             <nav class="nav-main">
                 <ul>
-                    <li><a href="/listajuegos/">JUEGOS</a></li>
-                    <li><a href="/listacanchas/">CANCHAS</a></li>
-                    <li><a class="active" href="login.html">LOGIN</a></li>
+                    <li><a href="{% url 'home' %}">HOME</a></li>
+                    <li><a href="#">CANCHAS</a></li>
+                    <li><a href="{% url 'register' %}">REGISTRAR</a></li>
+                    <li><a class="active" href="{% url 'login' %}">INICIA SESIÓN</a></li>
                 </ul>
             </nav>
         </header>
         <!--main-->
         <main class= "main">  
-            
-            
-              
+            <div class="search">
 
-                    <div class="search">
-                        <p>Busca partidos creados en pichanGO</p>
-                        <form action="/buscajuegos/" method="GET">
-                            <input type="text" name='q' class="searchTerm" placeholder="Distrito o nombre de cancha">
-                            <input  type="submit" name="submit" class="submit" onClick="window.location='listajuegos'; "value="Buscar"></input>
-                        </form>
-                        <p>Estos son todos los partidos creados</p>
-                        <table class="table table-sm table-dark">
-                            <thead>
-                            <tr>
-                                <th scope="col">Cancha</th>
-                                <th scope="col">Fecha</th>
-                                <th scope="col">Hora</th>
-                                <th scope="col">Distrito</th>
-                                <th scope="col">Costo/Hora</th>
-                                <th scope="col">Inscrit@s</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                                {% for item in data.all %}
-                                <tr>
-                                    <th scope="row"><a href="{% url 'detail' item.id %}">{{ item.cancha.nombre }}</a></th>
-                                    <td><a href="{% url 'detail' item.id %}">{{ item.fecha }}</a></td>
-                                    <td><a href="{% url 'detail' item.id %}">{{ item.hora }}</a></td>
-                                    <td><a href="{% url 'detail' item.id %}">{{ item.cancha.distrito }}</a></td>
-                                    <td>S/{{ item.cancha.costo_por_hora }}</td>
-                                    <td>
-                                        {{ item.jugador.all | length }}
-                                          
-                                    </td>
-                                </tr>
-                                {%  endfor   %}
-                            </tbody>
-                        </table>
-                            
-                    </div>
-                
-        
+                <p>Fecha: <input type="text" id="datepicker"></p>
+
+                <br>
+                <p>Busca partidos creados en pichanGO</p>
+
+                <table class="table-dark">  
+                    <tr>
+                        <th>Cancha</th>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>Distrito</th>
+                        <th>Costo/Hora</th>
+                        <th>Inscrit@s</th>
+                    </tr>
+                        {% for item in data.all %}
+                        <tr>
+                            <td><a href="{% url 'detail' item.id %}">{{ item.cancha.nombre }}</a></th>
+                            <td><a href="{% url 'detail' item.id %}">{{ item.fecha }}</a></td>
+                            <td><a href="{% url 'detail' item.id %}">{{ item.hora }}</a></td>
+                            <td><a href="{% url 'detail' item.id %}">{{ item.cancha.distrito }}</a></td>
+                            <td><a href="{% url 'detail' item.id %}">S/{{ item.cancha.costo_por_hora }}</a></td>
+                            <td><a href="{% url 'detail' item.id %}">{{ item.jugador.all | length }}</a></td>
+                        </tr>
+                        {%  endfor   %}
+
+                </table>
+
+        </section>
         </main>
   
         <!--footer-->
         <footer class="footer">
 
-            <p>Copyrtight &copy; 2020, pichanGO  </p>
         </footer>
 
     </div>

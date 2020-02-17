@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>PichanGO</title>
-    <link rel="shortcut icon" href="Images/ball.icon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static './Images/ball.icon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static './css/reset.css' %}" >
+    <link rel="stylesheet" href="{% static './css/styles.css' %}" >
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
@@ -17,25 +19,28 @@
         <!--header-->
         <header class ="header">
             <figure>
-                <img src="{% static "./Images/logosmall.png" %}" alt="logo">
+                <img src="{% static './Images/logosmall.png' %}" alt="logo">
             </figure>
-            <nav class="nav-main">
+            <!--<nav class="nav-main">
                 <ul>
-                    <li><a href="/listajuegos/">JUEGOS</a></li>
-                    <li><a href="/listacanchas/">CANCHAS</a></li>
-                    <li><a class="active" href="login.html">LOGIN</a></li>
+                    <li><a href="#">ABOUT</a></li>
+                    <li><a href="#">COURSES</a></li>
+                    <li><a href="#">EVENTS</a></li>
+                    <li><a href="#">GALLERY</a></li>
+                    <li><a href="#">BLOG</a></li>
+                    <li><a href="#">PAGES</a></li>
+                    <li><a class="active" href="login.html">INICIA SESIÓN</a></li>
                 </ul>
-            </nav>
+            </nav>-->
         </header>
         <!--main-->
         <main class= "main">  
+            <p>Próximas pichangas en las que te puedes unir</p>
+            
+              
+
                     <div class="search">
-                        <p>Busca partidos creados en pichanGO</p>
-                        <form action="/buscajuegos/" method="GET">
-                            <input type="text" name='q' class="searchTerm" placeholder="Distrito o nombre de cancha">
-                            <input  type="submit" name="submit" class="submit" onClick="window.location='listajuegos'; "value="Buscar"></input>
-                        </form>
-                        <p>Estos son todos los partidos creados</p>
+
                         <table class="table table-sm table-dark">
                             <thead>
                             <tr>
@@ -57,18 +62,38 @@
                                     <td>S/{{ item.cancha.costo_por_hora }}</td>
                                     <td>
                                         {{ item.jugador.all | length }}
+                                          
                                     </td>
                                 </tr>
                                 {%  endfor   %}
                             </tbody>
                         </table>
-                            
+                        <form action="/buscajuegos/" method="GET">
+                            <input type="text" name='q' class="searchTerm" placeholder="Distrito o nombre de cancha">
+                            <input  type="submit" name="submit" class="submit" onClick="window.location='listajuegos'; "value="Buscar"></input>
+                        </form>
                     </div>
+
+                    <P>en cualquier momento, en cualquier lugar </P>
+
+                <div class="form">
+                    <input type="submit" name="submit" class="submit-1" onclick="window.location='registrate';" value="Registrate"></input>
+                    <input type="submit" name="submit" class="submit-1" onclick="window.location='inicia-sesion';"value="Inicia Sesión"></input>
+                </div>
+                <h2 id="headline1">Como jugar?</h2>
+                <p id="about-us"> Si eres nuevo en PichanGo! <br> no te preocupes, acá encontrarás toda la información que necesites para empezar a JUGAR!!! </p>  
+                     <div class="video">
+                        <video width="412.5" height="337.5" controls>
+                            <source src="{% static 'Images/videoplayback.mp4' %}">
+                        </video>
+                    </div>
+            
         </main>
   
         <!--footer-->
         <footer class="footer">
 
+            <p>Copyrtight &copy; 2020, pichanGO  </p>
         </footer>
 
     </div>

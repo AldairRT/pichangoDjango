@@ -12,6 +12,20 @@ from django.views.generic import CreateView, TemplateView
 from django.contrib.auth.views import LoginView, LogoutView 
 # Create your views here.
 
+def home2(request):
+    startdate = datetime.today()
+    enddate = startdate + timedelta(days=5)
+    juegos = Juego.objects.filter(fecha__range=[startdate, enddate])
+    context = {'data':juegos}
+    return render(request, 'home2.html', context)
+
+def buscajuegos2(request):
+   q = request.GET.get('q', '')
+   querys = (Q(cancha__nombre__icontains=q) | Q(cancha__distrito__icontains=q))
+   buscajuegos = Juego.objects.filter(querys)
+   context = {'data':buscajuegos}
+   return render(request, 'buscajuegos2.html', context)
+
 def registerPage(request):
     if request.user.is_authenticated:
         return redirect('profile')
@@ -104,6 +118,7 @@ def listajuegos(request):
 
 def detail(request,juego_id):
     juego_detail = get_object_or_404(Juego,pk=juego_id)
+    
     context = {'data':juego_detail}
     return render(request,'juego.html', context)
 
