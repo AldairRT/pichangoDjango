@@ -25,7 +25,12 @@
                 <ul>
                     <li><a href="/listajuegos/">JUEGOS</a></li>
                     <li><a href="/listacanchas/">CANCHAS</a></li>
-                    <li><a class="active" href="login.html">LOGIN</a></li>
+                    {% if user.is_authenticated %}
+                    <li><a class="active" href="{% url 'sign_out' %}">LOGOUT</a></li>
+                        {% else %}
+                            <li><a class="active" href="{% url 'sign_in' %}">LOGIN</a></li>                        
+                        {% endif %}
+                    
                 </ul>
             </nav>
         </header>

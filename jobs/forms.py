@@ -2,7 +2,7 @@ from django import forms
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
-from .models import Jugador
+from .models import *
 
 #Clase creada por Eduardo
 class CreateUserForm(UserCreationForm):
@@ -26,3 +26,9 @@ class SignUpForm(UserCreationForm):
             'password1',
             'password2',
         )
+
+class JuegoForm(forms.ModelForm):
+    class Meta: 
+        model = Juego
+        fields=('fecha','hora','cancha', 'descripcion')
+        #fields = '__all__'

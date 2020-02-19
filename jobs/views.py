@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import *
+from .forms import *
 from django.contrib.auth.forms import UserCreationForm
 from .forms import CreateUserForm, SignUpForm
 from datetime import date, datetime, timedelta
@@ -106,6 +107,28 @@ def detail(request,juego_id):
     juego_detail = get_object_or_404(Juego,pk=juego_id)
     context = {'data':juego_detail}
     return render(request,'juego.html', context)
+
+def creajuego(request):
+    form = JuegoForm()
+    if request.method=='POST':
+        form=JuegoForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect('/')    
+    context ={'form':form}
+    return render(request,'creajuego.html',context)
+
+def inscripcion(request,juego_id):
+    juego_detail = get_object_or_404(Juego,pk=juego_id)
+    
+    form = JuegoForm()
+    if request.method=='POST':
+        form=JuegoForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect('/')    
+    context ={'form':form}
+    return render(request,'creajuego.html',context)
 
 def listacanchas(request):
     listacanchas = Cancha.objects

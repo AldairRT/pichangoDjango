@@ -8,8 +8,8 @@
     <title>PichanGO</title>
     <link rel="shortcut icon" href="{% static "./images/ball.icon.ico" %}" type="image/x-icon">
     <link rel="stylesheet" href="{% static "./css/reset.css" %}" >
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static "./css/styles.css" %}" >
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 </head>
@@ -19,9 +19,8 @@
         <!--header-->
         <header class ="header">
             <figure>
-               <a href="/"><img src="{% static "./Images/logosmall.png" %}" alt="logo"></a>
+                <img src="{% static "./Images/logosmall.png" %}" alt="logo">
             </figure>
-            
             <nav class="nav-main">
                 <ul>
                     <li><a href="/listajuegos/">JUEGOS</a></li>
@@ -38,24 +37,37 @@
         <!--main-->
         <main class= "main">  
             
-                    <div class="jumbotron">
-                        <h3 class="display-4">Login</h3>
-                        <hr class="my-4">
-                        <form method="POST">
+            <div class="container">
+                <div class="columns is-mobile">
+                    <div class="column is-half is-offset-one-quarter">
+                        <div class="content"><h2>Register</h2></div>
+                        <form method="post" enctype="multipart/form-data">
                             {% csrf_token %}
-                            {{ form.as_p }}
-                            <input type="submit" name="submit">
+                            {% for non_field_error in form.non_field_errors %}
+                                <p class="help is-danger">{{ non_field_error }}</p>
+                            {% endfor %}
+                            {% for field in form %}
+                                <div class="field">
+                                    <label for="{{ field.id_for_label }}" class="label">{{ field.html_name }}</label>
+                                    {{ field }}
+                                {% for error in field.errors %}
+                                    <p class="help is-danger">{{ error }}</p>
+                                {% endfor %}
+                                </div>
+                            {% endfor %}
+                            
+                            
+                            <input type="submit" value="Crear Juego" class="button is-primary">
+                            <p><a href="{% url 'listajuegos' %}">Ver juegos</a></p>
                         </form>
-                        
-                        
                     </div>
+                </div>
+            </div>      
+        
         </main>
   
         <!--footer-->
-        <footer class="footer">
-
-            <p>Copyrtight &copy; 2020, pichanGO  </p>
-        </footer>
+    
 
     </div>
     </div>

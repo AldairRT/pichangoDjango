@@ -17,6 +17,7 @@ urlpatterns = [
     path('buscajuegos/', views.buscajuegos, name ="buscajuegos"),
     path('buscacanchas/', views.buscacanchas, name ="buscacanchas"),
     path('listajuegos/<int:juego_id>', views.detail,name='detail'),
+    path('creajuego/', views.creajuego,name='creajuego'),
     path('listacanchas/', views.listacanchas, name ="listacanchas"),
     path('listacanchas/<int:cancha_id>', views.cancha_detail,name='cancha_detail'),
     path('profile/', views.profile,name='profile')
