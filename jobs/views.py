@@ -99,7 +99,9 @@ def home(request):
     return render(request, 'home.html', context)
 
 def listajuegos(request):
-    listajuegos = Juego.objects
+    startdate = datetime.today() + timedelta(days=1)
+    enddate = date(3000,12,31)
+    listajuegos = Juego.objects.filter(fecha__range=[startdate, enddate])
     context = {'data':listajuegos}
     return render(request, 'listajuegos.html',context)
 
@@ -119,16 +121,17 @@ def creajuego(request):
     return render(request,'creajuego.html',context)
 
 def inscripcion(request,juego_id):
-    juego_detail = get_object_or_404(Juego,pk=juego_id)
-    
-    form = JuegoForm()
-    if request.method=='POST':
-        form=JuegoForm(request.POST)
-        if form.is_valid():
-            form.save()
-        return redirect('/')    
-    context ={'form':form}
-    return render(request,'creajuego.html',context)
+    juegodetalle = get_object_or_404(Juego,pk=juego_id)
+    clave = request.user.jugador.id
+    juegodetalle.jugador.add(clave)
+    return redirect('../listajuegos/' + str(juego_id))
+
+def salirdejuego(request,juego_id):
+    juegodetalle = get_object_or_404(Juego,pk=juego_id)
+    clave = request.user.jugador.id
+    juegodetalle.jugador.remove(clave)
+    return redirect('../listajuegos/' + str(juego_id))
+
 
 def listacanchas(request):
     listacanchas = Cancha.objects

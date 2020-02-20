@@ -61,8 +61,8 @@
                                 {% for juego in juegos.all %}
                                 <tr>
                                     
-                                    <td><a href="">{{ juego.fecha }}</a></td>
-                                    <td><a href="">{{ juego.hora }}</a></td>
+                                    <td><a href="{% url 'detail' juego.id %}">{{ juego.fecha }}</a></td>
+                                    <td><a href="{% url 'detail' juego.id %}">{{ juego.hora }}</a></td>
                                     
                                     <td>
                                         
